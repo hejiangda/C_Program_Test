@@ -5,7 +5,8 @@
 #include <time.h>
 
 /* prototypes */
-void shuffle( int wDeck[][ 13 ] );
+void shuffleAndDeal( int wDeck[][ 13 ],const char *wFace[],
+           const char *wSuit[] );
 void deal( const int wDeck[][ 13 ], const char *wFace[],
            const char *wSuit[] );
 
@@ -25,13 +26,14 @@ int main( void )
 
    srand( time( 0 ) ); /* seed random-number generator */
 
-   shuffle( deck ); /* shuffle the deck */
-   deal( deck, face, suit ); /* deal the deck */
+   shuffleAndDeal( deck,face,suit ); /* shuffle the deck */
+  //  deal( deck, face, suit ); /* deal the deck */
    return 0; /* indicates successful termination */
 } /* end main */
 
 /* shuffle cards in deck */
-void shuffle( int wDeck[][ 13 ] )
+void shuffleAndDeal( int wDeck[][ 13 ] ,const char *wFace[],
+           const char *wSuit[])
 {
    int row; /* row number */
    int column; /* column number */
@@ -48,6 +50,8 @@ void shuffle( int wDeck[][ 13 ] )
 
       /* place card number in chosen slot of deck */
       wDeck[ row ][ column ] = card;
+      printf( "%5s of %-8s%c", wFace[ column ], wSuit[ row ],
+         card % 2 == 0 ? '\n' : '\t' );
    } /* end for */
 } /* end function shuffle */
 

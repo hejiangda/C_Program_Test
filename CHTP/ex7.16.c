@@ -1,3 +1,4 @@
+// ex7.16.c
 /* Fig. 7.24: fig07_24.c
    Card shuffling dealing program */
 #include <stdio.h>
@@ -8,7 +9,6 @@
 void shuffle( int wDeck[][ 13 ] );
 void deal( const int wDeck[][ 13 ], const char *wFace[],
            const char *wSuit[] );
-
 int main( void )
 {
    /* initialize suit array */
@@ -22,33 +22,51 @@ int main( void )
 
    /* initialize deck array */
    int deck[ 4 ][ 13 ] = { 0 };
-
+   int row,column,card=1;
+   for (row=0; row<4; row++) {
+     for(column=0;column<13;column++){
+       deck[row][column]=card;
+       card++;
+      //  printf("%3d",deck[row][column] );
+     }
+    //  printf("\n" );
+   }
    srand( time( 0 ) ); /* seed random-number generator */
 
    shuffle( deck ); /* shuffle the deck */
    deal( deck, face, suit ); /* deal the deck */
+  //  for (row=0; row<4; row++) {
+  //    for(column=0;column<13;column++){
+  //     //  deck[row][column]=card;
+  //     //  card++;
+  //      printf("%3d",deck[row][column] );
+  //    }
+  //    printf("\n" );
+  //  }
+
    return 0; /* indicates successful termination */
 } /* end main */
 
 /* shuffle cards in deck */
 void shuffle( int wDeck[][ 13 ] )
 {
+   void swap(int *element1Ptr,int *element2ptr);
    int row; /* row number */
    int column; /* column number */
    int card; /* counter */
+   int rowTemp,columnTemp;
+    int countt=0;
+    for (row=0; row<4; row++) {
+      for(column=0;column<13;column++){
+        rowTemp = rand() % 4;
+        columnTemp = rand() % 13;
+        if(rowTemp>row||columnTemp>column){
+          swap(&wDeck[row][column],&wDeck[rowTemp][columnTemp]);
+          countt++;
+        }
+      }
+    }
 
-   /* for each of the 52 cards, choose slot of deck randomly */
-   for ( card = 1; card <= 52; card++ ) {
-
-      /* choose new random location until unoccupied slot found */
-      do {
-         row = rand() % 4;
-         column = rand() % 13;
-      } while( wDeck[ row ][ column ] != 0 ); /* end do...while */
-
-      /* place card number in chosen slot of deck */
-      wDeck[ row ][ column ] = card;
-   } /* end for */
 } /* end function shuffle */
 
 /* deal cards in deck */
@@ -78,6 +96,12 @@ void deal( const int wDeck[][ 13 ], const char *wFace[],
    } /* end for */
 } /* end function deal */
 
+void swap(int *element1Ptr,int *element2ptr){
+  int hold;
+  hold=*element1Ptr;
+  *element1Ptr=*element2ptr;
+  *element2ptr=hold;
+}
 
 
 /**************************************************************************
