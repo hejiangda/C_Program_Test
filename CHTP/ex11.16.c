@@ -22,7 +22,11 @@ int main(){
     fprintf(fPtr,"%-20s%5lu\n",s1[8],sizeof(float));
     fprintf(fPtr,"%-20s%5lu\n",s1[9],sizeof(double));
     fprintf(fPtr,"%-20s%5lu\n",s1[10],sizeof(long double));
-
+    fprintf(fPtr, "%c",EOF );
 
   }
+  // rewind(fPtr);
+  fprintf(fPtr, "%s\n","hello rewind" );
+  fclose(fPtr);
+
 }

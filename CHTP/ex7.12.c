@@ -70,12 +70,10 @@ void deal( const int wDeck[][ 13 ], const char *wFace[],
          for ( column = 0; column <= 12; column++ ) {
 
             /* if slot contains current card, display card */
-            printf( "%5s of %-8s%c", wFace[ column ], wSuit[ row ],'\n');
-
-            // if ( wDeck[ row ][ column ] == card ) {
-            //   printf( "%5s of %-8s**%d%c", wFace[ column ], wSuit[ row ],card,
-            //       card % 2 == 0 ? '\n' : '\t' );
-            // } /* end if */
+            if ( wDeck[ row ][ column ] == card ) {
+               printf( "%5s of %-8s%c", wFace[ column ], wSuit[ row ],
+                  card % 2 == 0 ? '\n' : '\t' );
+            } /* end if */
          } /* end for */
       } /* end for */
    } /* end for */
